@@ -1,5 +1,5 @@
 /* appear.js 1.0.3 */
-appear = (function(){
+(function(){
   'use strict';
   var scrollLastPos = null, scrollTimer = 0, scroll = {};
 
@@ -173,7 +173,7 @@ appear = (function(){
         }
       }
 
-      return function(obj) {
+      var appear = function(obj) {
         obj = obj || {};
 
         // assign the fn to execute when a node is visible
@@ -206,6 +206,7 @@ appear = (function(){
         // add an event listener to init when dom is ready
         addEventListener('DOMContentLoaded', init, false);
 
+        // http://stackoverflow.com/questions/9900311/how-do-i-target-only-internet-explorer-10-for-certain-situations-like-internet-e/13971998#13971998
         var isIE10 = false;
         if (Function('/*@cc_on return document.documentMode===10@*/')()){
           isIE10 = true;
@@ -243,6 +244,12 @@ appear = (function(){
         };
 
       };
+
+      if (typeof module !== 'undefined' && typeof module.exports !== 'undefined')
+          module.exports = appear;
+      else
+        window.appear = appear;
+
     }()(obj));
   };
 }());
